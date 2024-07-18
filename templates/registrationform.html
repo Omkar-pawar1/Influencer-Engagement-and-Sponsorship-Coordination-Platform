@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script>
+        // Define categories and niches
+        const categoriesNiches = {
+            'Fashion': ['Streetwear', 'High Fashion', 'Sustainable Fashion', 'Plus-Size Fashion', 'Children\'s Fashion'],
+            'Beauty': ['Skincare', 'Makeup Tutorials', 'Haircare', 'Natural/Organic Beauty', 'Men\'s Grooming'],
+            'Lifestyle': ['Minimalism', 'Parenting', 'Home Decor', 'Organization', 'Wellness'],
+            'Fitness and Health': ['Yoga', 'CrossFit', 'Bodybuilding', 'Nutrition', 'Mental Health'],
+            'Travel': ['Luxury Travel', 'Budget Travel', 'Adventure Travel', 'Solo Travel', 'Family Travel'],
+            'Food and Beverage': ['Vegan Cooking', 'Baking', 'Wine Tasting', 'Restaurant Reviews', 'Healthy Recipes'],
+            'Technology': ['Gadgets', 'Software Reviews', 'Gaming', 'Coding Tutorials', 'Tech News'],
+            'Finance': ['Personal Finance', 'Cryptocurrency', 'Investing', 'Real Estate', 'Frugal Living'],
+            'Education': ['Language Learning', 'Science Communication', 'Educational Toys', 'Online Courses', 'Study Tips'],
+            'Entertainment': ['Movie Reviews', 'Music', 'Comedy', 'Theatre', 'Celebrity News'],
+            'Automotive': ['Car Reviews', 'Motorcycles', 'Electric Vehicles', 'Car Maintenance', 'Automotive News'],
+            'Pets': ['Dog Training', 'Cat Care', 'Pet Products', 'Exotic Pets', 'Pet Adoption']
+        };
+
+        function updateNiches() {
+            var categorySelect = document.getElementById('category');
+            var nicheSelect = document.getElementById('niche');
+            var selectedCategory = categorySelect.value;
+
+            // Clear the niche options
+            nicheSelect.innerHTML = '';
+
+            // Populate niche options based on selected category
+            if (selectedCategory in categoriesNiches) {
+                categoriesNiches[selectedCategory].forEach(function(niche) {
+                    var option = document.createElement('option');
+                    option.value = niche;
+                    option.text = niche;
+                    nicheSelect.add(option);
+                });
+            }
+        }
+    </script>
+
+</head>
+<body>
+	<nav>
+		<a href="{{url_for('Login_form_for_influencer')}}" role="button">Influencer Login</a>
+		<a href="{{url_for('Login_form_for_sponser')}}" role="button"> Sponsor Login</a>
+
+	</nav>
+	<h1>Welcome to app</h1>
+	<!-- <h3>Please register here</h3>
+	<div><button>Influenser </button>
+	</div>
+	<div>
+		<button>Sponser </button>
+	</div>
+	<label for="role">Register as:</label>
+        <select id="role" name="Role">
+        	<option value="Select">Select from here</option>
+            <option value="influencer">Influencer</option>
+            <option value="sponsors">Sponsors</option>
+            
+        </select>
+     -->
+
+    <label for="influencer">Register as Influencer:</label>
+	<form id= "influencer"  method="post" action="{{url_for('Create_Influencer_User')}}" >
+		Enter your Name:-<input type="text" name="username">
+		<br>
+		Enter your Password:-<input type="password" name="password">
+		<br>
+		Enter your Email:-<input type="email" name="email">
+		<br>
+		  
+            <label>Select your Category:</label>
+            <select name="category" id="category" onchange="updateNiches()" required>
+                <option value="">Select Category</option>
+                <!-- Populate categories from JavaScript object -->
+                <script>
+                    for (var category in categoriesNiches) {
+                        var option = document.createElement('option');
+                        option.value = category;
+                        option.text = category;
+                        document.getElementById('category').add(option);
+                    }
+                </script>
+            </select>
+        <br>
+            <label>Select your Niche:</label>
+            <select name="niche" id="niche" required>
+                <option value="">Select Niche</option>
+                <!-- Options will be populated dynamically based on selected category -->
+            </select>
+        
+        <br>
+        Enter your Reach:- <input type="number" name="reach">
+        <br>	
+        Submit:- <input type="submit" name="submit" value="submit">
+	</form>
+	<br>
+	<br>
+
+	<label for="sponsor">Register as Sponsor:</label>
+
+	<form id="sponsor" method="post" action="{{url_for('Create_Sponsor_User')}}" >
+		Enter your Company name:-<input type="text" name="cname">
+		<br>
+		Enter your Password:-<input type="password" name="password">
+		<br>
+		Enter your Email:-<input type="email" name="email">
+		<br>
+        Enter your Industry:- <input type="text" name="industry">
+        <br>
+        Entry your Budget:- <input type="number" name="budget">
+        <br>
+        Submit:- <input type="submit" name="submit" value="submit">
+	</form>
+
+
+</body>
+</html>
